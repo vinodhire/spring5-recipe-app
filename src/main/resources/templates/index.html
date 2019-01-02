@@ -1,10 +1,61 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="../static/bootstrap.min.css"
+          integrity="" crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}">
+
+    <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="" crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}">
     <title>Recipe Application</title>
 </head>
 <body>
-<h1 th:text="'Index Page'">Index Page</h1>
+
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            <div class="card border-primary m-3">
+                <div class="card-header bg-success">
+                    <h1 class="card-title">My Recipes</h1>
+                </div>
+                <div class="card-body">
+
+                    <div class="table-responsive" th:if="${not #lists.isEmpty(recipes)}">
+                        <table class="table table-hover">
+                            <thead class="thread-inverse">
+                            <tr>
+                                <td>ID</td>
+                                <td>Description</td>
+                                <td>View</td>
+                            </tr>
+                            <tr>
+                                <td>123</td>
+                                <td>Tasty Goodness 1</td>
+                                <td><a href="#"> View </a></td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!--/*@thymesVar id="recipe" type="com.vinod.recipeapp.domain.Recipe" */-->
+                            <tr th:each="recipe : ${recipes}">
+                                <td th:text="${recipe.id}">123</td>
+                                <td th:text="${recipe.description}">Some description</td>
+                                <td><a href="#" th:href="@{'/recipe/'+ ${recipe.id}}"> View </a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
